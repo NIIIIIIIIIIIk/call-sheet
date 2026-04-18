@@ -1,0 +1,166 @@
+.telegramLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  color: #8b7355;
+  text-decoration: none;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border: 1px solid rgba(196, 145, 42, 0.2);
+  background: rgba(10, 8, 5, 0.5);
+  backdrop-filter: blur(5px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Эффект специи при наведении */
+.telegramLink::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, rgba(196, 145, 42, 0.2) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  transition: width 0.5s ease, height 0.5s ease;
+  z-index: -1;
+}
+
+.telegramLink:hover::before {
+  width: 200px;
+  height: 200px;
+}
+
+.telegramLink:hover {
+  color: #c4912a;
+  border-color: #c4912a;
+  box-shadow: 
+    0 0 20px rgba(196, 145, 42, 0.2),
+    inset 0 0 10px rgba(196, 145, 42, 0.05);
+  transform: translateY(-1px);
+}
+
+/* Активное состояние */
+.telegramLink:active {
+  transform: translateY(1px);
+  box-shadow: 0 0 10px rgba(196, 145, 42, 0.3);
+}
+
+.spiceChar {
+  color: #c4912a;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  animation: spicePulse 3s ease-in-out infinite;
+}
+
+.telegramLink:hover .spiceChar {
+  animation: spiceRotate 1s ease-in-out;
+}
+
+.linkText {
+  position: relative;
+  font-weight: 500;
+}
+
+/* Подчеркивание при наведении */
+.linkText::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: #c4912a;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.telegramLink:hover .linkText::after {
+  width: 100%;
+}
+
+.linkHint {
+  color: #5a4a3a;
+  font-size: 10px;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.3s ease;
+}
+
+.telegramLink:hover .linkHint {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Анимации */
+@keyframes spicePulse {
+  0%, 100% {
+    opacity: 0.6;
+    text-shadow: 0 0 5px #c4912a;
+  }
+  50% {
+    opacity: 1;
+    text-shadow: 0 0 15px #c4912a, 0 0 30px #ff8c00;
+  }
+}
+
+@keyframes spiceRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(15deg);
+  }
+  75% {
+    transform: rotate(-15deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+/* Индикатор загрузки */
+.telegramLink.loading {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.telegramLink.loading .spiceChar {
+  animation: loadingSpin 1s linear infinite;
+}
+
+@keyframes loadingSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .telegramLink {
+    padding: 8px 16px;
+    font-size: 14px;
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .linkHint {
+    display: none;
+  }
+}
+
+/* Для устройств без поддержки backdrop-filter */
+@supports not (backdrop-filter: blur(5px)) {
+  .telegramLink {
+    background: rgba(10, 8, 5, 0.95);
+  }
+}

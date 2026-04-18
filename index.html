@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <!--- <link rel="icon" type="image/svg+xml" href="/favicon.svg" /> *заменить икону* -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CALL_SHEET</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+      /* Критические стили для быстрой загрузки */
+      body {
+        margin: 0;
+        padding: 0;
+        background: #0a0804;
+        overflow-x: hidden;
+      }
+      #root {
+        position: relative;
+        z-index: 10;
+      }
+      .loading-spice {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #c4912a;
+        font-family: 'Cinzel', serif;
+        font-size: 24px;
+        z-index: 9999;
+        animation: spicePulse 2s infinite;
+      }
+      @keyframes spicePulse {
+        0%, 100% { opacity: 0.3; }
+        50% { opacity: 1; }
+      }
+    </style>
+  </head>
+
+  <body>
+    
+    <div class="loading-spice">ФОРСИТСЯ...</div>
+    <div id="root"></div>
+    
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
